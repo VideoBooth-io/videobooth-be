@@ -16,6 +16,8 @@ const params = {
   Prefix: 'avatars/'  // Can be your folder name
 }
 
+console.log("test")
+
 exports.seed = async function(knex) {
   const avatars = [];
   let promise = new Promise((resolve, reject) => {
