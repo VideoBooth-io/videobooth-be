@@ -31,7 +31,7 @@ router.post("/register", validateSignup, async function (req, res) {
 			return avatars[index].src;
 		})
 		.catch((err) => {
-			res.status(500).json({ message: `Could not assign avatar ${avatar} to user ${user}.` });
+			res.status(500).json({ message: `Could not assign avatar to user ${user}.` });
 		});
 
 	user.avatar = avatar;
