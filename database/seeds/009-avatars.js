@@ -4,8 +4,9 @@ const path = require("path");
 const AWS = require('aws-sdk');
 
 AWS.config.update({
-	accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-	secretAccessKey: process.env.AWS_SECRET_ACCESS
+  region: "us-west-1",
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID, 
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
 const s3 = new AWS.S3();
@@ -16,8 +17,6 @@ const params = {
   Prefix: 'avatars/'  // Can be your folder name
 }
 
-console.log("test")
-
 exports.seed = async function(knex) {
   const avatars = [];
   let promise = new Promise((resolve, reject) => {
@@ -26,6 +25,7 @@ exports.seed = async function(knex) {
         console.log(err, err.stack);
       } else {
         data.Contents.forEach((avatar) => {
+          console.log(avatar)
           avatars.push({ src: `${avatar.Key}` });
         })
       }

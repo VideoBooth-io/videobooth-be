@@ -27,6 +27,7 @@ router.post("/register", validateSignup, async function (req, res) {
 	//Pick a random avatar and assign it to new user
 	const avatar = await Avatars.find()
 		.then((avatars) => {
+			console.log(avatars)
 			const index = Math.floor(Math.random() * (avatars.length - 1));
 			return avatars[index].src;
 		})
