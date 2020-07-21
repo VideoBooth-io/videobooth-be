@@ -15,7 +15,7 @@ function find() {
 
 function findById(id) {
 	return db
-		.select("id", "email", "username", "first_name", "last_name", "avatar")
+		.select("id", "email", "first_name", "last_name", "avatar")
 		.from("users")
 		.where({ id: id })
 		.first();
