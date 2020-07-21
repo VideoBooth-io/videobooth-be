@@ -3,7 +3,7 @@ require("dotenv").config();
 module.exports = {
   development: {
     client: "pg",
-    connection: process.env.DATABASE_URL_DEV,
+    connection: "postgresql://localhost",
     useNullAsDefault: true,
     migrations: {
       directory: "./database/migrations",

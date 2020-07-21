@@ -10,5 +10,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-	tbl.dropColumn("thumbnail")
+	tbl.dropColumn("videos")
 };
