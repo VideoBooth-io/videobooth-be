@@ -11,6 +11,9 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  tbl.dropColumn("last_name")
-  tbl.dropColumn("first_name")
+  return knex.schema
+	.table("users", (tbl) => {
+    tbl.dropColumn("first_name");
+    tbl.dropColumn("last_name");
+	})
 };
