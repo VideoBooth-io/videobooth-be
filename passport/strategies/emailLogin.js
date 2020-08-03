@@ -9,10 +9,10 @@ passport.use(
     db.findByEmail(email)
       .then((user) => {
         if (!user) {
-          return verify(null, false, "Invalid email/password combination");
+          return verify(null, false, { message: "That email and password combination is incorrect."});
         }
         if (!bcrypt.compareSync(password, user.password)) {
-          return verify(null, false, "Invalid email/password combination");
+          return verify(null, false, { message: "That email and password combination is incorrect."});
         }
         return verify(null, user);
       })

@@ -15,8 +15,12 @@ const AvatarRouter = require("../avatars/avatarRouter");
 
 const server = express();
 
+var corsOptions = {
+  origin: '*',
+}
+
 server.use(helmet());
-server.use(cors());
+server.use(cors(corsOptions));
 server.use(express.json());
 
 server.use(passport.initialize());

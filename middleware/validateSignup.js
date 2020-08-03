@@ -11,6 +11,6 @@ module.exports = function(req, res, next) {
     };
     next();
   } else {
-    res.status(400).json({ message: "Please provide a valid first name, last name, email, username and password to signup." });
+    res.status(400).json({ message: "Please provide a valid first name, last name, email and password to signup." });
   }
 };

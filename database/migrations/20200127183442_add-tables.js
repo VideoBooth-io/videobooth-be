@@ -13,9 +13,6 @@ exports.up = function (knex) {
                 .unique()
                 .notNullable();
 
-            tbl.string('username', 128)
-                .unique()
-
             tbl.string('password', 128)
                 .notNullable();
         })

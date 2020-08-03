@@ -8,16 +8,24 @@ const router = express.Router();
 const { signToken, validateSignup } = require("../middleware/middleware");
 
 // 1. Login with email
-router.post("/login/email", passport.authenticate("email-login", { session: false }), function (req, res) {
-	res.status(200).json(loginSuccessBody(req.user));
+
+router.post('/login', (req, res, next) => {
+  passport.authenticate('email-login', { session: false }, (err, user, info) => {
+		if (info) {
+			console.log("info", info)
+		res.status(401).json(info);
+	} else if (err) {
+		console.log("err", err)
+		res.status(500).json(err);
+	} else if (!user) { 
+		res.status(401).json('That email and password combination is incorrect.');
+	} else {
+		res.status(200).json(loginSuccessBody(user));
+	}
+  })(req, res, next);
 });
 
-// 2. Login with username
-router.post("/login/username", passport.authenticate("username-login", { session: false }), function (req, res) {
-	res.status(200).json(loginSuccessBody(req.user));
-});
-
-// 3. register new user
+// 2. register new user
 router.post("/register", validateSignup, async function (req, res) {
 	const user = req.user;
 
@@ -27,7 +35,6 @@ router.post("/register", validateSignup, async function (req, res) {
 	//Pick a random avatar and assign it to new user
 	const avatar = await Avatars.find()
 		.then((avatars) => {
-			console.log(avatars)
 			const index = Math.floor(Math.random() * (avatars.length - 1));
 			return avatars[index].src;
 		})
@@ -63,7 +70,6 @@ function loginSuccessBody(user) {
 		user: {
 			id: user.id,
 			email: user.email,
-			username: user.username,
 			first_name: user.first_name,
 			last_name: user.last_name,
 			avatar: user.avatar,
