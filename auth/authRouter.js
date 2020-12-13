@@ -10,7 +10,6 @@ const { signToken, validateSignup } = require("../middleware/middleware");
 // 1. Login with email
 
 router.post('/login', (req, res, next) => {
-	console.log("/login")
   passport.authenticate('email-login', { session: false }, (err, user, info) => {
 		if (info) {
 			console.log("info", info)
