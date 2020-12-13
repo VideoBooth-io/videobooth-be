@@ -8,6 +8,7 @@ passport.use(
   new Strategy({ usernameField: "email" }, function(email, password, verify) {
     db.findByEmail(email)
       .then((user) => {
+        console.log("passporto user", user)
         if (!user) {
           return verify(null, false, { message: "That email and password combination is incorrect."});
         }
@@ -17,6 +18,7 @@ passport.use(
         return verify(null, user);
       })
       .catch((err) => {
+        console.log("passporto error", err)
         return verify(err);
       });
   })
